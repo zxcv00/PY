@@ -1,7 +1,5 @@
 import tkinter
-
 from tictactoe_game_engine import TictactoeGameEngine
-
 
 class TictactoeGUI:
     def __init__(self):
@@ -11,12 +9,23 @@ class TictactoeGUI:
     def init_GUI(self):
         self.CANVAS_SIZE = 300
         self.root = tkinter.Tk()
-        self.root.title('틱택토')
-        self.root.geometry(f'{self.CANVAS_SIZE}x{self.CANVAS_SIZE}')    # 300x300
-        self.root.resizable(width=False, height=False)
+        self.root.title('TICTACTOE')
+        self.root.geometry(f'{self.CANVAS_SIZE}x{self.CANVAS_SIZE}')    # 300 x 300
+        self.root.resizable(width = False, height = False)
+
+        self.canvas = tkinter.Canvas(self.root, bg = 'white', width = self.CANVAS_SIZE, height = self.CANVAS_SIZE)
+        self.canvas.pack()
+
+        self.images = {}        # {'X' => PhotoImage 객체, 'O' => PhotoImage 객체}
+        self.images['X'] = tkinter.PhotoImage(file = 'X.gif')
+        self.images['O'] = tkinter.PhotoImage(file ='O.gif')
+
+        self.canvas.bind('<Button-1>', self.click_handler)       # click_handler => 가로가 없고, 현재 실행하는 것이 아닌 버튼을 눌러야만 실행하는 것 (괄호 없애기)
+
+        self.root.mainloop()
 
     def click_handler(self, event):
-        pass
+        print('CLICK')
 
     def draw_board(self):
         pass
