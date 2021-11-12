@@ -24,7 +24,7 @@ class TictactoeConsole:
             winner = self.game_engine.set_winner()
 
             # 승자가 있거나 무승부일 경우 => 게임 오버 => 결과 출력
-            if winner == 'X' or winner == "O":
+            if winner == 'X' or winner == 'O':
                 print(f'{winner} win! 🎊')
             elif winner == 'd':
                 print('무승부!')
