@@ -1,4 +1,6 @@
 import tkinter
+from tkinter import messagebox
+
 from tictactoe_game_engine import TictactoeGameEngine
 
 class TictactoeGUI:
@@ -33,19 +35,49 @@ class TictactoeGUI:
 
         # show board
         self.game_engine.show_board()
+        self.draw_board()
 
         # set winner
+        winner = self.game_engine.set_winner()
 
         # 승자가 있거나 무승부일 경우 game over => 결과 출력
+        if winner == 'X' or winner == 'O':
+            messagebox.showinfo('GAME OVER', f'{winner} WIN 🎊')
+            self.root.quit()
+        elif winner == 'd':
+            messagebox.showinfo('GAME OVER', 'TIE 🙌')
+            self.root.quit()
 
         # change turn
+        self.game_engine.change_turn()
 
     def draw_board(self):
-        pass
+        TILE_SIZE = self.CANVAS_SIZE // self.game_engine.SIZE       # 100
+
+        # clear
+        self.canvas.delete('all')
+
+        x = 0
+        y = 0
+
+        for i, v in enumerate(self.game_engine.board):
+            if v == '.':
+                pass
+            else:       # elif v == 'X or v == 'O'
+                self.canvas.create_image(x, y, anchor = 'nw', image = self.images[v])
+            x += TILE_SIZE
+
+            if i % self.game_engine.SIZE == self.game_engine.SIZE - 1:
+                x = 0
+                y += TILE_SIZE
+
 
     def cordinate_to_position(self, x, y):
         # x = col, y = row
-        return y // 100 + 1, x // 100 + 1
+        row = y // (self.CANVAS_SIZE // self.game_engine.SIZE) + 1
+        col = x // (self.CANVAS_SIZE // self.game_engine.SIZE) + 1
+
+        return row, col
 
 if __name__ == '__main__':
     ttt_GUI = TictactoeGUI()
