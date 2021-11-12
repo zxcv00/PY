@@ -44,10 +44,8 @@ class TictactoeGUI:
         pass
 
     def cordinate_to_position(self, x, y):
-
-
-        return 2, 2
-
+        # x = col, y = row
+        return y // 100 + 1, x // 100 + 1
 
 if __name__ == '__main__':
     ttt_GUI = TictactoeGUI()
